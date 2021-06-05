@@ -24,7 +24,7 @@ class DokterController extends Controller {
      */
     public function create()
     {
-        //
+        return view('dokter0246_tambah');
     }
 
     /**
@@ -35,7 +35,13 @@ class DokterController extends Controller {
      */
     public function store(Request $request)
     {
-        //
+       Dokter:: create([
+        'id' => $request->id_dokter,
+        'nama' => $request->nama_dokter,
+        'jabatan'=> $request->jabatan_dokter,
+       ]);
+
+       return redirect('dokter0246');
     }
 
     /**
@@ -57,7 +63,8 @@ class DokterController extends Controller {
      */
     public function edit($id)
     {
-        //
+        $dokter = dokter::find($id);
+        return view ('dokter_edit', ['dokter'=> $dokter]);
     }
 
     /**
@@ -69,7 +76,11 @@ class DokterController extends Controller {
      */
     public function update(Request $request, $id)
     {
-        //
+        $dokter = dokter::find($id);
+        $dokter->id =$request->id;
+        $dokter->nama_dokter =$request->nama_dokter;
+        $dokter->jabatan_dokter =$request->jabatan_dokter;
+        $dokter->save();
     }
 
     /**
@@ -80,6 +91,9 @@ class DokterController extends Controller {
      */
     public function destroy($id)
     {
-        //
+        $dokter =dokter::find($id);
+        $dokter->delete();
+
+        return redirect('dokter');
     }
 }

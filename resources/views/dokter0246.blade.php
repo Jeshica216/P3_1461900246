@@ -41,9 +41,19 @@
         <?php $no = 1; ?>
         @foreach($dokter as $dokter)
         <tr>
-            <td>{{$dokter->id}}</td>
-            <td>{{$dokter->nama}}</td>
-            <td>{{$dokter->jabatan}}</td>
+            <td>{{ $no++ }}</td> 
+            <td>{{ $dokter->id}}</td>
+            <td>{{ $dokter->nama}}</td>
+            <td>{{ $dokter->jabatan}}</td>
+            <td>
+                <a href="{{url(dokter/' . $dokter->id . "/edit") }}">Edit</a>
+
+               <form action="{{ url (dokter/' .$dokter->id)}}" method="post">Hapus</=>
+                 @csrf
+                 <input type="hidden" name="_method" value="delete">
+                 <button type="submit">Delete</button>
+                 </form>
+            </td>
         </tr>
         @endforeach
       </tbody>
